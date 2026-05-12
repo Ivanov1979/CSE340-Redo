@@ -1,3 +1,13 @@
+:root {
+    --primary: #0077ff;
+    --primary-dark: #0057cc;
+    --accent: #00c2ff;
+    --background: #f4f9ff;
+    --text: #1f2937;
+    --card: #ffffff;
+    --border: #cfe3ff;
+}
+
 * {
     box-sizing: border-box;
 }
@@ -5,118 +15,214 @@
 body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
 }
 
-.container {
-    max-width: 1100px;
-    margin: auto;
-    padding: 0 20px;
-}
+/* =========================
+   HEADER
+========================= */
 
-.site-header {
-    background-color: #1e3a8a;
+header {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
     color: white;
+    padding: 1.5rem 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
-.header-inner {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 0;
+header h1 {
+    margin: 0 0 1rem;
+    font-size: 2.2rem;
+    text-align: center;
+    letter-spacing: 1px;
 }
 
-.brand {
+/* =========================
+   NAVIGATION
+========================= */
+
+nav {
     display: flex;
-    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+nav a {
+    color: white;
     text-decoration: none;
-    color: white;
     font-weight: bold;
-    font-size: 1.3rem;
+    padding: 0.7rem 1.2rem;
+    border-radius: 10px;
+    transition: background 0.25s ease, transform 0.2s ease;
 }
 
-.brand-mark {
-    background: white;
-    color: #1e3a8a;
-    padding: 6px 10px;
-    border-radius: 5px;
-    margin-right: 8px;
+nav a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
 }
 
-.nav a {
-    margin-left: 20px;
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-}
-
-.nav a:hover {
-    text-decoration: underline;
-}
+/* =========================
+   MAIN CONTENT
+========================= */
 
 main {
-    max-width: 800px;
-    margin: auto;
-    padding: 40px 20px;
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--card);
+    border-radius: 18px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 }
 
-h1 {
-    color: #1e3a8a;
-}
-
-footer {
-    background: #111;
-    color: white;
+h2 {
+    color: var(--primary);
+    margin-top: 0;
+    font-size: 2.1rem;
     text-align: center;
-    padding: 20px;
-    margin-top: 40px;
 }
 
-.skip-link {
-    position: absolute;
-    left: -999px;
+p {
+    font-size: 1.08rem;
 }
 
-.skip-link:focus {
-    left: 10px;
-    top: 10px;
-    background: white;
-    padding: 8px;
-    z-index: 1000;
+/* =========================
+   HERO SECTION
+========================= */
+
+.hero {
+    text-align: center;
 }
 
-.project-card {
-    border: 1px solid #ddd;
-    border-radius: 10px;
-    padding: 1.2rem;
-    margin-bottom: 1.2rem;
-    background-color: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+.hero-image {
+    width: 100%;
+    max-width: 950px;
+    border-radius: 20px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 10px 25px rgba(0, 119, 255, 0.2);
+}
+
+.hero p {
+    max-width: 760px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* =========================
+   LISTS
+========================= */
+
+ul {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding-left: 1.5rem;
+}
+
+li {
+    margin: 0.8rem 0;
+    padding: 0.8rem;
+    background: #eef6ff;
+    border-left: 6px solid var(--primary);
+    border-radius: 8px;
     transition: transform 0.2s ease;
 }
 
-.project-card:hover {
-    transform: translateY(-3px);
+li:hover {
+    transform: translateX(5px);
 }
 
-.category-tags {
-    margin-top: 1rem;
+/* =========================
+   CARDS
+========================= */
+
+.card {
+    background: white;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 14px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
 }
 
-.tag {
-    display: inline-block;
-    margin: 0.25rem 0.4rem 0.25rem 0;
-    padding: 0.45rem 0.75rem;
-    background-color: #1e3a8a;
-    color: #fff;
-    text-decoration: none;
-    border-radius: 999px;
+/* =========================
+   BUTTONS
+========================= */
+
+button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.8rem 1.4rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background 0.25s ease;
 }
 
-.tag:hover,
-.tag:focus {
-    background-color: #2563eb;
-    outline: 2px solid #111827;
-    outline-offset: 2px;
+button:hover {
+    background: var(--primary-dark);
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+footer {
+    background: var(--primary-dark);
+    color: white;
+    text-align: center;
+    padding: 1.3rem;
+    margin-top: 2rem;
+}
+
+/* =========================
+   LINKS
+========================= */
+
+a {
+    transition: 0.2s ease;
+}
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 768px) {
+
+    header {
+        padding: 1.25rem;
+    }
+
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    nav {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+    }
+
+    nav a {
+        width: 90%;
+        text-align: center;
+    }
+
+    main {
+        margin: 1rem;
+        padding: 1.3rem;
+    }
+
+    h2 {
+        font-size: 1.7rem;
+    }
+
+    .hero-image {
+        border-radius: 14px;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
 }
