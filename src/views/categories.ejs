@@ -1,12 +1,29 @@
 <%- include("partials/header", { title }) %>
 
-    <h2>Categories</h2>
+    <section class="page-banner">
+        <h2>
+            <%= title %>
+        </h2>
 
-    <ul>
-        <li>Environmental</li>
-        <li>Educational</li>
-        <li>Community Service</li>
-        <li>Health and Wellness</li>
-    </ul>
+        <p>
+            These categories help organize service projects by purpose and community impact.
+        </p>
+    </section>
+
+    <section class="organizations-container">
+
+        <% categories.forEach(category=> { %>
+
+            <div class="organization-card">
+
+                <h3>
+                    <%= category.name %>
+                </h3>
+
+            </div>
+
+            <% }) %>
+
+    </section>
 
     <%- include("partials/footer") %>
