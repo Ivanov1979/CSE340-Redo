@@ -1,6 +1,44 @@
 <%- include("partials/header", { title }) %>
 
-    <h2>Organizations</h2>
-    <p>List of organizations will go here.</p>
+    <main>
+
+        <section class="page-banner">
+            <h2>
+                <%= title %>
+            </h2>
+            <p>
+                Meet our partner organizations dedicated to mathematics,
+                education, and community development.
+            </p>
+        </section>
+
+        <section class="organizations-container">
+
+            <% organizations.forEach(org=> { %>
+
+                <div class="organization-card">
+
+                    <img src="/images/<%= org.logo_filename %>" alt="<%= org.name %> Logo" class="organization-logo">
+
+                    <h3>
+                        <%= org.name %>
+                    </h3>
+
+                    <p class="organization-description">
+                        <%= org.description %>
+                    </p>
+
+                    <p class="organization-contact">
+                        <strong>Contact:</strong>
+                        <%= org.contact_email %>
+                    </p>
+
+                </div>
+
+                <% }) %>
+
+        </section>
+
+    </main>
 
     <%- include("partials/footer") %>

@@ -68,23 +68,21 @@ nav a:hover {
 ========================= */
 
 main {
-    max-width: 1100px;
+    max-width: 1200px;
     margin: 2rem auto;
     padding: 2rem;
-    background: var(--card);
-    border-radius: 18px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 }
 
 h2 {
     color: var(--primary);
     margin-top: 0;
-    font-size: 2.1rem;
+    font-size: 2.2rem;
     text-align: center;
 }
 
-p {
-    font-size: 1.08rem;
+h3 {
+    color: var(--primary-dark);
+    margin-top: 1rem;
 }
 
 /* =========================
@@ -93,6 +91,10 @@ p {
 
 .hero {
     text-align: center;
+    background: white;
+    padding: 2rem;
+    border-radius: 20px;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
 }
 
 .hero-image {
@@ -107,6 +109,65 @@ p {
     max-width: 760px;
     margin: 0 auto;
     font-size: 1.1rem;
+}
+
+/* =========================
+   PAGE BANNER
+========================= */
+
+.page-banner {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.page-banner p {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+}
+
+/* =========================
+   ORGANIZATION CARDS
+========================= */
+
+.organizations-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+}
+
+.organization-card {
+    background: var(--card);
+    border-radius: 18px;
+    padding: 2rem;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.organization-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+}
+
+.organization-logo {
+    width: 180px;
+    height: auto;
+    border-radius: 16px;
+    margin-bottom: 1rem;
+    object-fit: cover;
+}
+
+.organization-description {
+    margin-top: 1rem;
+    color: #374151;
+}
+
+.organization-contact {
+    margin-top: 1rem;
+    color: var(--primary-dark);
+    font-weight: bold;
 }
 
 /* =========================
@@ -125,43 +186,6 @@ li {
     background: #eef6ff;
     border-left: 6px solid var(--primary);
     border-radius: 8px;
-    transition: transform 0.2s ease;
-}
-
-li:hover {
-    transform: translateX(5px);
-}
-
-/* =========================
-   CARDS
-========================= */
-
-.card {
-    background: white;
-    padding: 1.5rem;
-    margin: 1.5rem 0;
-    border-radius: 14px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
-}
-
-/* =========================
-   BUTTONS
-========================= */
-
-button {
-    background: var(--primary);
-    color: white;
-    border: none;
-    padding: 0.8rem 1.4rem;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: background 0.25s ease;
-}
-
-button:hover {
-    background: var(--primary-dark);
 }
 
 /* =========================
@@ -173,15 +197,7 @@ footer {
     color: white;
     text-align: center;
     padding: 1.3rem;
-    margin-top: 2rem;
-}
-
-/* =========================
-   LINKS
-========================= */
-
-a {
-    transition: 0.2s ease;
+    margin-top: 3rem;
 }
 
 /* =========================
@@ -191,7 +207,7 @@ a {
 @media (max-width: 768px) {
 
     header {
-        padding: 1.25rem;
+        padding: 1.2rem;
     }
 
     header h1 {
@@ -201,7 +217,6 @@ a {
     nav {
         flex-direction: column;
         align-items: center;
-        gap: 0.6rem;
     }
 
     nav a {
@@ -210,19 +225,30 @@ a {
     }
 
     main {
-        margin: 1rem;
-        padding: 1.3rem;
+        padding: 1rem;
     }
 
-    h2 {
-        font-size: 1.7rem;
+    .hero {
+        padding: 1.5rem;
     }
 
     .hero-image {
         border-radius: 14px;
     }
 
-    .hero p {
-        font-size: 1rem;
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .organizations-container {
+        grid-template-columns: 1fr;
+    }
+
+    .organization-card {
+        padding: 1.5rem;
+    }
+
+    .organization-logo {
+        width: 140px;
     }
 }
