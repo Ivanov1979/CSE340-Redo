@@ -1,7 +1,9 @@
 import express from "express";
 import path from "path";
 import { fileURLToPath } from "url";
+
 import { getAllOrganizations } from "./src/models/organizations.js";
+import { getAllCategories } from "./src/models/categories.js";
 
 const app = express();
 
@@ -47,14 +49,33 @@ app.get("/organizations", async (req, res) => {
 
 });
 
+// Categories route
+app.get("/categories", async (req, res) => {
+
+    try {
+
+        const categories = await getAllCategories();
+
+        const title = "Service Project Categories";
+
+        res.render("categories", {
+            title,
+            categories
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        res.send("Database error");
+
+    }
+
+});
+
 // Projects route
 app.get("/projects", (req, res) => {
     res.render("projects", { title: "Projects" });
-});
-
-// Categories route
-app.get("/categories", (req, res) => {
-    res.render("categories", { title: "Categories" });
 });
 
 // Start server
