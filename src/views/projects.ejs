@@ -1,6 +1,37 @@
 <%- include("partials/header", { title }) %>
 
-    <h2>Projects</h2>
-    <p>List of projects will go here.</p>
+    <section class="page-banner">
+        <h2>
+            <%= title %>
+        </h2>
+        <p>
+            Explore service projects connected to our partner organizations.
+        </p>
+    </section>
+
+    <section class="organizations-container">
+
+        <% projects.forEach(project=> { %>
+
+            <div class="organization-card">
+
+                <h3>
+                    <%= project.name %>
+                </h3>
+
+                <p>
+                    <%= project.description %>
+                </p>
+
+                <p>
+                    <strong>Organization:</strong>
+                    <%= project.organization_name %>
+                </p>
+
+            </div>
+
+            <% }) %>
+
+    </section>
 
     <%- include("partials/footer") %>
