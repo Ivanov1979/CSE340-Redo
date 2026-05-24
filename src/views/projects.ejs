@@ -5,7 +5,8 @@
             <%= title %>
         </h2>
         <p>
-            Explore service projects connected to our partner organizations.
+            View the next upcoming service projects and learn how each one connects
+            to our partner organizations.
         </p>
     </section>
 
@@ -16,7 +17,9 @@
             <div class="organization-card">
 
                 <h3>
-                    <%= project.name %>
+                    <a href="/project/<%= project.project_id %>">
+                        <%= project.title %>
+                    </a>
                 </h3>
 
                 <p>
@@ -24,8 +27,15 @@
                 </p>
 
                 <p>
+                    <strong>Date:</strong>
+                    <%= project.date.toDateString() %>
+                </p>
+
+                <p>
                     <strong>Organization:</strong>
-                    <%= project.organization_name %>
+                    <a href="/organization/<%= project.organization_id %>">
+                        <%= project.organization_name %>
+                    </a>
                 </p>
 
             </div>

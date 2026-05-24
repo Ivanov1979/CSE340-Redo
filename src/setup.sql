@@ -13,8 +13,10 @@ CREATE TABLE organization (
 
 CREATE TABLE projects (
     project_id SERIAL PRIMARY KEY,
-    name VARCHAR(150) NOT NULL,
+    title VARCHAR(150) NOT NULL,
     description TEXT NOT NULL,
+    date DATE NOT NULL,
+    location VARCHAR(150) NOT NULL,
     organization_id INT NOT NULL,
     FOREIGN KEY (organization_id)
         REFERENCES organization(organization_id)
@@ -57,17 +59,42 @@ VALUES
 );
 
 INSERT INTO projects
-(name, description, organization_id)
+(title, description, date, location, organization_id)
 VALUES
 (
     'Digital Mathematics Support',
     'A project that helps students improve mathematics using digital tools.',
+    '2026-06-15',
+    'Alto Hospicio Community Center',
     1
 ),
 (
     'Community Learning Workshops',
     'A service project offering learning workshops for the community.',
+    '2026-07-10',
+    'Iquique Public Library',
     2
+),
+(
+    'STEM Tutoring Program',
+    'A tutoring project focused on mathematics, science, and technology.',
+    '2026-08-05',
+    'Local School Innovation Lab',
+    1
+),
+(
+    'Health and Wellness Education Day',
+    'A community event focused on wellness education and family support.',
+    '2026-09-12',
+    'Community Sports Center',
+    2
+),
+(
+    'Environmental Math Challenge',
+    'Students use mathematics to analyze environmental data and propose solutions.',
+    '2026-10-20',
+    'Outdoor Learning Park',
+    1
 );
 
 INSERT INTO categories (name)
@@ -83,4 +110,9 @@ VALUES
 (1, 2),
 (1, 3),
 (2, 2),
-(2, 4);
+(2, 3),
+(3, 2),
+(4, 4),
+(4, 3),
+(5, 1),
+(5, 2);
