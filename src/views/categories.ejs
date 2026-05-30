@@ -1,29 +1,47 @@
 <%- include("partials/header", { title }) %>
 
-    <section class="page-banner">
-        <h2>
-            <%= title %>
-        </h2>
+    <main>
 
-        <p>
-            These categories help organize service projects by purpose and community impact.
+        <section class="page-banner">
+
+            <h2>
+                <%= title %>
+            </h2>
+
+            <p>
+                These categories help organize service projects by purpose and community impact.
+            </p>
+
+        </section>
+
+        <section class="organizations-container">
+
+            <% categories.forEach(category=> { %>
+
+                <div class="organization-card">
+
+                    <h3>
+                        <a href="/categories/<%= category.category_id %>">
+                            <%= category.name %>
+                        </a>
+                    </h3>
+
+                </div>
+
+                <% }) %>
+
+        </section>
+
+        <p class="add-link">
+
+            <a href="/new-category">
+
+                Add a New Category
+
+            </a>
+
         </p>
-    </section>
 
-    <section class="organizations-container">
-
-        <% categories.forEach(category=> { %>
-
-            <div class="organization-card">
-
-                <h3>
-                    <%= category.name %>
-                </h3>
-
-            </div>
-
-            <% }) %>
-
-    </section>
+    </main>
 
     <%- include("partials/footer") %>

@@ -1,15 +1,18 @@
-<%- include("partials/header", { title }) %>
+<%- include('partials/header', { title }) %>
 
     <main>
 
         <section class="page-banner">
-            <h2>
+
+            <h1>
                 <%= title %>
-            </h2>
+            </h1>
+
             <p>
-                Meet our partner organizations dedicated to mathematics,
-                education, and community development.
+                Meet our partner organizations dedicated to education,
+                mathematics, and community development.
             </p>
+
         </section>
 
         <section class="organizations-container">
@@ -18,18 +21,18 @@
 
                 <div class="organization-card">
 
-                    <img src="/images/<%= org.logo_filename %>" alt="<%= org.name %> Logo" class="organization-logo">
-
                     <h3>
-                        <%= org.name %>
+                        <a href="/organizations/<%= org.organization_id %>">
+                            <%= org.name %>
+                        </a>
                     </h3>
 
-                    <p class="organization-description">
+                    <p>
                         <%= org.description %>
                     </p>
 
-                    <p class="organization-contact">
-                        <strong>Contact:</strong>
+                    <p>
+                        <strong>Email:</strong>
                         <%= org.contact_email %>
                     </p>
 
@@ -39,6 +42,14 @@
 
         </section>
 
+        <p class="add-link">
+
+            <a href="/organizations/new">
+                Add a New Organization
+            </a>
+
+        </p>
+
     </main>
 
-    <%- include("partials/footer") %>
+    <%- include('partials/footer') %>

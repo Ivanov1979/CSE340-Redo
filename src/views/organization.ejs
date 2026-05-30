@@ -1,63 +1,54 @@
-<%- include('partials/header') %>
+<%- include('partials/header', { title }) %>
 
     <main>
 
-        <% if (organizationDetails) { %>
+        <section class="page-banner">
 
-            <h2>
-                <%= organizationDetails.name %>
-            </h2>
+            <h1>
+                <%= title %>
+            </h1>
 
-            <% if (organizationDetails.logo_filename) { %>
+            <p>
+                Meet our partner organizations dedicated to education,
+                mathematics, and community development.
+            </p>
 
-                <img src="/images/<%= organizationDetails.logo_filename %>" alt="<%= organizationDetails.name %> logo">
+        </section>
 
-                <% } %>
+        <section class="organizations-container">
+
+            <% organizations.forEach(org=> { %>
+
+                <div class="organization-card">
+
+                    <h3>
+                        <a href="/organizations/<%= org.organization_id %>">
+                            <%= org.name %>
+                        </a>
+                    </h3>
 
                     <p>
-                        <%= organizationDetails.description %>
+                        <%= org.description %>
                     </p>
 
                     <p>
-                        <strong>Contact:</strong>
-                        <%= organizationDetails.contact_email %>
+                        <strong>Email:</strong>
+                        <%= org.contact_email %>
                     </p>
 
-                    <h3>Service Projects</h3>
+                </div>
 
-                    <% if (projects && projects.length> 0) { %>
+                <% }) %>
 
-                        <ul>
+        </section>
 
-                            <% projects.forEach(project=> { %>
+        <p class="add-link">
 
-                                <li>
-                                    <a href="/project/<%= project.project_id %>">
-                                        <%= project.title %>
-                                    </a>
-                                </li>
+            <a href="/organizations/new">
+                Add a New Organization
+            </a>
 
-                                <% }) %>
-
-                        </ul>
-
-                        <% } else { %>
-
-                            <p>
-                                No service projects are currently associated with this organization.
-                            </p>
-
-                            <% } %>
-
-                                <% } else { %>
-
-                                    <h2>Organization Not Found</h2>
-
-                                    <p>
-                                        The requested organization could not be found.
-                                    </p>
-
-                                    <% } %>
+        </p>
 
     </main>
 
