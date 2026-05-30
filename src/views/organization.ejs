@@ -1,55 +1,34 @@
-<%- include('partials/header', { title }) %>
+<%- include("partials/header", { title }) %>
 
     <main>
-
         <section class="page-banner">
+            <h2>
+                <%= organization.name %>
+            </h2>
+            <p>Organization Details</p>
+        </section>
 
-            <h1>
-                <%= title %>
-            </h1>
+        <section class="organization-detail">
+            <img src="/images/<%= organization.logo_filename %>" alt="<%= organization.name %> Logo"
+                class="organization-logo">
+
+            <h3>
+                <%= organization.name %>
+            </h3>
 
             <p>
-                Meet our partner organizations dedicated to education,
-                mathematics, and community development.
+                <%= organization.description %>
             </p>
 
+            <p>
+                <strong>Contact:</strong>
+                <%= organization.contact_email %>
+            </p>
+
+            <p>
+                <a href="/organizations">Back to Organizations</a>
+            </p>
         </section>
-
-        <section class="organizations-container">
-
-            <% organizations.forEach(org=> { %>
-
-                <div class="organization-card">
-
-                    <h3>
-                        <a href="/organizations/<%= org.organization_id %>">
-                            <%= org.name %>
-                        </a>
-                    </h3>
-
-                    <p>
-                        <%= org.description %>
-                    </p>
-
-                    <p>
-                        <strong>Email:</strong>
-                        <%= org.contact_email %>
-                    </p>
-
-                </div>
-
-                <% }) %>
-
-        </section>
-
-        <p class="add-link">
-
-            <a href="/organizations/new">
-                Add a New Organization
-            </a>
-
-        </p>
-
     </main>
 
-    <%- include('partials/footer') %>
+    <%- include("partials/footer") %>
