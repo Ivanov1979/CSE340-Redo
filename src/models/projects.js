@@ -1,9 +1,5 @@
 import db from "./db.js";
 
-// ======================================
-// GET ALL PROJECTS
-// ======================================
-
 const getAllProjects = async () => {
     const query = `
         SELECT
@@ -21,13 +17,8 @@ const getAllProjects = async () => {
     `;
 
     const result = await db.query(query);
-
     return result.rows;
 };
-
-// ======================================
-// GET UPCOMING PROJECTS
-// ======================================
 
 const getUpcomingProjects = async (number_of_projects) => {
     const query = `
@@ -47,16 +38,9 @@ const getUpcomingProjects = async (number_of_projects) => {
         LIMIT $1;
     `;
 
-    const queryParams = [number_of_projects];
-
-    const result = await db.query(query, queryParams);
-
+    const result = await db.query(query, [number_of_projects]);
     return result.rows;
 };
-
-// ======================================
-// GET PROJECT DETAILS
-// ======================================
 
 const getProjectDetails = async (id) => {
     const query = `
@@ -74,16 +58,9 @@ const getProjectDetails = async (id) => {
         WHERE p.project_id = $1;
     `;
 
-    const queryParams = [id];
-
-    const result = await db.query(query, queryParams);
-
+    const result = await db.query(query, [id]);
     return result.rows.length > 0 ? result.rows[0] : null;
 };
-
-// ======================================
-// GET PROJECTS BY ORGANIZATION ID
-// ======================================
 
 const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
@@ -99,20 +76,74 @@ const getProjectsByOrganizationId = async (organizationId) => {
         ORDER BY date;
     `;
 
-    const queryParams = [organizationId];
-
-    const result = await db.query(query, queryParams);
-
+    const result = await db.query(query, [organizationId]);
     return result.rows;
 };
 
-// ======================================
-// EXPORT MODEL FUNCTIONS
-// ======================================
+const createProject = async (
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const query = `
+        INSERT INTO projects (
+            name,
+            description,
+            location,
+            date,
+            organization_id
+        )
+        VALUES ($1, $2, $3, $4, $5)
+        RETURNING project_id;
+    `;
+
+    const result = await db.query(query, [
+        title,
+        description,
+        location,
+        date,
+        organizationId
+    ]);
+
+    return result.rows[0].project_id;
+};
+
+const updateProject = async (
+    projectId,
+    title,
+    description,
+    location,
+    date,
+    organizationId
+) => {
+    const query = `
+        UPDATE projects
+        SET
+            name = $1,
+            description = $2,
+            location = $3,
+            date = $4,
+            organization_id = $5
+        WHERE project_id = $6;
+    `;
+
+    await db.query(query, [
+        title,
+        description,
+        location,
+        date,
+        organizationId,
+        projectId
+    ]);
+};
 
 export {
     getAllProjects,
     getUpcomingProjects,
     getProjectDetails,
-    getProjectsByOrganizationId
+    getProjectsByOrganizationId,
+    createProject,
+    updateProject
 };

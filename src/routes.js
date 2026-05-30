@@ -1,63 +1,140 @@
-import express from "express";
+import express from 'express';
 
 import {
-    showHomePage
-} from "./controllers/index.js";
-
-import {
-    showOrganizationsPage
-} from "./controllers/organizations.js";
-
-import {
-    showProjectsPage,
-    showProjectDetailsPage
-} from "./controllers/projects.js";
+    getOrganizations,
+    getOrganization,
+    showNewOrganizationForm,
+    processNewOrganizationForm,
+    organizationValidation,
+    showEditOrganizationForm,
+    processEditOrganizationForm
+} from './controllers/organizations.js';
 
 import {
     showCategoriesPage,
-    showCategoryDetailsPage
-} from "./controllers/categories.js";
+    showCategoryDetailsPage,
+    showNewCategoryForm,
+    processNewCategoryForm,
+    showEditCategoryForm,
+    processEditCategoryForm,
+    categoryValidation
+} from './controllers/categories.js';
 
 import {
-    testErrorPage
-} from "./controllers/errors.js";
+    getProjects,
+    getProject,
+    showNewProjectForm,
+    processNewProjectForm,
+    showEditProjectForm,
+    processEditProjectForm,
+    projectValidation
+} from './controllers/projects.js';
 
 const router = express.Router();
 
-// ======================================
-// MAIN ROUTES
-// ======================================
+router.get('/', (req, res) => {
+    res.redirect('/organizations');
+});
 
-// Home page
-router.get("/",
-    showHomePage);
+/* ORGANIZATIONS */
 
-// Organizations page
-router.get("/organizations",
-    showOrganizationsPage);
+router.get('/organizations', getOrganizations);
 
-// Projects page
-router.get("/projects",
-    showProjectsPage);
+router.get('/organizations/new', showNewOrganizationForm);
 
-// Project details page
-router.get("/project/:id",
-    showProjectDetailsPage);
+router.post(
+    '/organizations/new',
+    organizationValidation,
+    processNewOrganizationForm
+);
 
-// Categories page
-router.get("/categories",
-    showCategoriesPage);
+router.get(
+    '/edit-organization/:id',
+    showEditOrganizationForm
+);
 
-// Category details page
-router.get("/category/:id",
-    showCategoryDetailsPage);
+router.post(
+    '/edit-organization/:id',
+    organizationValidation,
+    processEditOrganizationForm
+);
 
-// ======================================
-// ERROR TEST ROUTE
-// ======================================
+router.get(
+    '/organizations/:id/edit',
+    showEditOrganizationForm
+);
 
-router.get("/test-error",
-    testErrorPage);
+router.get(
+    '/organizations/:id',
+    getOrganization
+);
 
-// Export router
+/* CATEGORIES */
+
+router.get(
+    '/categories',
+    showCategoriesPage
+);
+
+router.get(
+    '/new-category',
+    showNewCategoryForm
+);
+
+router.post(
+    '/new-category',
+    categoryValidation,
+    processNewCategoryForm
+);
+
+router.get(
+    '/edit-category/:id',
+    showEditCategoryForm
+);
+
+router.post(
+    '/edit-category/:id',
+    categoryValidation,
+    processEditCategoryForm
+);
+
+router.get(
+    '/categories/:id',
+    showCategoryDetailsPage
+);
+
+/* PROJECTS */
+
+router.get(
+    '/projects',
+    getProjects
+);
+
+router.get(
+    '/new-project',
+    showNewProjectForm
+);
+
+router.post(
+    '/new-project',
+    projectValidation,
+    processNewProjectForm
+);
+
+router.get(
+    '/edit-project/:id',
+    showEditProjectForm
+);
+
+router.post(
+    '/edit-project/:id',
+    projectValidation,
+    processEditProjectForm
+);
+
+router.get(
+    '/projects/:id',
+    getProject
+);
+
 export default router;

@@ -29,16 +29,69 @@ const getOrganizationDetails = async (organizationId) => {
         WHERE organization_id = $1;
     `;
 
-    const queryParams = [organizationId];
-
-    const result = await db.query(query, queryParams);
+    const result = await db.query(query, [organizationId]);
 
     return result.rows.length > 0
         ? result.rows[0]
         : null;
 };
 
+const createOrganization = async (
+    name,
+    description,
+    contactEmail,
+    logoFilename
+) => {
+    const query = `
+        INSERT INTO organization (
+            name,
+            description,
+            contact_email,
+            logo_filename
+        )
+        VALUES ($1, $2, $3, $4)
+        RETURNING organization_id;
+    `;
+
+    const result = await db.query(query, [
+        name,
+        description,
+        contactEmail,
+        logoFilename
+    ]);
+
+    return result.rows[0].organization_id;
+};
+
+const updateOrganization = async (
+    organizationId,
+    name,
+    description,
+    contactEmail,
+    logoFilename
+) => {
+    const query = `
+        UPDATE organization
+        SET
+            name = $1,
+            description = $2,
+            contact_email = $3,
+            logo_filename = $4
+        WHERE organization_id = $5;
+    `;
+
+    await db.query(query, [
+        name,
+        description,
+        contactEmail,
+        logoFilename,
+        organizationId
+    ]);
+};
+
 export {
     getAllOrganizations,
-    getOrganizationDetails
+    getOrganizationDetails,
+    createOrganization,
+    updateOrganization
 };

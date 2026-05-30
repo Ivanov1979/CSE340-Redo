@@ -1,9 +1,5 @@
 import db from "./db.js";
 
-// ======================================
-// GET ALL CATEGORIES
-// ======================================
-
 const getAllCategories = async () => {
     const query = `
         SELECT
@@ -17,10 +13,6 @@ const getAllCategories = async () => {
 
     return result.rows;
 };
-
-// ======================================
-// GET CATEGORY DETAILS
-// ======================================
 
 const getCategoryDetails = async (id) => {
     const query = `
@@ -38,10 +30,6 @@ const getCategoryDetails = async (id) => {
         : null;
 };
 
-// ======================================
-// GET CATEGORIES BY PROJECT ID
-// ======================================
-
 const getCategoriesByProjectId = async (projectId) => {
     const query = `
         SELECT
@@ -58,10 +46,6 @@ const getCategoriesByProjectId = async (projectId) => {
 
     return result.rows;
 };
-
-// ======================================
-// GET PROJECTS BY CATEGORY ID
-// ======================================
 
 const getProjectsByCategoryId = async (categoryId) => {
     const query = `
@@ -87,13 +71,33 @@ const getProjectsByCategoryId = async (categoryId) => {
     return result.rows;
 };
 
-// ======================================
-// EXPORT MODEL FUNCTIONS
-// ======================================
+const createCategory = async (name) => {
+    const query = `
+        INSERT INTO categories (name)
+        VALUES ($1)
+        RETURNING category_id;
+    `;
+
+    const result = await db.query(query, [name]);
+
+    return result.rows[0].category_id;
+};
+
+const updateCategory = async (id, name) => {
+    const query = `
+        UPDATE categories
+        SET name = $1
+        WHERE category_id = $2;
+    `;
+
+    await db.query(query, [name, id]);
+};
 
 export {
     getAllCategories,
     getCategoryDetails,
     getCategoriesByProjectId,
-    getProjectsByCategoryId
+    getProjectsByCategoryId,
+    createCategory,
+    updateCategory
 };

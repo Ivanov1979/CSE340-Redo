@@ -1,66 +1,158 @@
-import express from 'express';
-import { fileURLToPath } from 'url';
-import path from 'path';
-import router from './src/routes.js';
+import express from "express";
 
-const NODE_ENV = process.env.NODE_ENV?.toLowerCase() || 'development';
-const PORT = process.env.PORT || 3000;
+import path from "path";
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { fileURLToPath } from "url";
+
+import dotenv from "dotenv";
+
+import session from "express-session";
+
+import flash from "./src/middleware/flash.js";
+
+import routes from "./src/routes.js";
+
+
+// Load environment variables
+dotenv.config();
+
 
 const app = express();
 
-// Serve static files
-app.use(express.static(path.join(__dirname, 'public')));
 
-// View engine setup
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'src/views'));
+// Fix __dirname for ES Modules
+const __filename =
+    fileURLToPath(import.meta.url);
 
-// Middleware to log requests
-app.use((req, res, next) => {
-    if (NODE_ENV === 'development') {
-        console.log(`${req.method} ${req.url}`);
+const __dirname =
+    path.dirname(__filename);
+
+
+// Environment Variables
+const PORT =
+    process.env.PORT || 3000;
+
+const SESSION_SECRET =
+    process.env.SESSION_SECRET;
+
+
+/* =========================
+   VIEW ENGINE
+========================= */
+
+app.set("view engine", "ejs");
+
+
+/* =========================
+   VIEWS DIRECTORY
+========================= */
+
+app.set(
+    "views",
+    path.join(
+        __dirname,
+        "src/views"
+    )
+);
+
+
+/* =========================
+   SESSION MIDDLEWARE
+========================= */
+
+app.use(session({
+
+    secret: SESSION_SECRET,
+
+    resave: false,
+
+    saveUninitialized: true,
+
+    cookie: {
+
+        maxAge:
+            60 * 60 * 1000
+
     }
-    next();
-});
 
-// Middleware to make NODE_ENV available in all templates
-app.use((req, res, next) => {
-    res.locals.NODE_ENV = NODE_ENV;
-    next();
-});
+}));
 
-// Use imported routes
-app.use(router);
 
-// Catch-all 404 route
-app.use((req, res, next) => {
-    const err = new Error('Page Not Found');
-    err.status = 404;
-    next(err);
-});
+/* =========================
+   FLASH MIDDLEWARE
+========================= */
 
-// Global error handler
-app.use((err, req, res, next) => {
-    console.error('Error occurred:', err.message);
-    console.error('Stack trace:', err.stack);
+app.use(flash);
 
-    const status = err.status || 500;
-    const template = status === 404 ? '404' : '500';
 
-    const context = {
-        title: status === 404 ? 'Page Not Found' : 'Server Error',
-        error: err.message,
-        stack: err.stack
-    };
+/* =========================
+   BODY PARSING
+========================= */
 
-    res.status(status).render(`errors/${template}`, context);
-});
+app.use(
+    express.urlencoded({
+        extended: true
+    })
+);
 
-// Start server
+app.use(express.json());
+
+
+/* =========================
+   STATIC FILES
+========================= */
+
+app.use(
+    express.static(
+        path.join(
+            __dirname,
+            "public"
+        )
+    )
+);
+
+
+/* =========================
+   TEST SESSION ROUTE
+========================= */
+
+app.get(
+    "/test-session",
+    (req, res) => {
+
+        if (!req.session.views) {
+
+            req.session.views = 1;
+
+        } else {
+
+            req.session.views++;
+
+        }
+
+        res.send(
+            `Session working. Views: ${req.session.views}`
+        );
+
+    }
+);
+
+
+/* =========================
+   ROUTES
+========================= */
+
+app.use(routes);
+
+
+/* =========================
+   START SERVER
+========================= */
+
 app.listen(PORT, () => {
-    console.log(`Server is running at http://127.0.0.1:${PORT}`);
-    console.log(`Environment: ${NODE_ENV}`);
+
+    console.log(
+        `Server running at http://localhost:${PORT}`
+    );
+
 });

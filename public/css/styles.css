@@ -1,254 +1,315 @@
 :root {
     --primary: #0077ff;
-    --primary-dark: #0057cc;
-    --accent: #00c2ff;
-    --background: #f4f9ff;
+    --primary-dark: #003f8f;
+    --secondary: #f4f8fb;
     --text: #1f2937;
+    --muted: #6b7280;
     --card: #ffffff;
-    --border: #cfe3ff;
+    --border: #dbe3ea;
 }
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
 body {
-    margin: 0;
     font-family: Arial, Helvetica, sans-serif;
-    background: var(--background);
+    background: var(--secondary);
     color: var(--text);
     line-height: 1.6;
 }
 
-/* =========================
-   HEADER
-========================= */
-
 header {
     background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-    color: white;
     padding: 1.5rem 2rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    color: white;
+    text-align: center;
 }
 
 header h1 {
-    margin: 0 0 1rem;
-    font-size: 2.2rem;
-    text-align: center;
-    letter-spacing: 1px;
+    margin-bottom: 1rem;
+    color: white;
 }
 
-/* =========================
-   NAVIGATION
-========================= */
-
-nav {
+nav ul {
+    list-style: none;
     display: flex;
     justify-content: center;
+    gap: 2rem;
     flex-wrap: wrap;
-    gap: 1rem;
 }
 
 nav a {
     color: white;
     text-decoration: none;
     font-weight: bold;
-    padding: 0.7rem 1.2rem;
-    border-radius: 10px;
-    transition: background 0.25s ease, transform 0.2s ease;
 }
 
 nav a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-2px);
+    text-decoration: underline;
 }
-
-/* =========================
-   MAIN CONTENT
-========================= */
 
 main {
+    width: 90%;
     max-width: 1200px;
-    margin: 2rem auto;
-    padding: 2rem;
+    margin: 3rem auto;
 }
-
-h2 {
-    color: var(--primary);
-    margin-top: 0;
-    font-size: 2.2rem;
-    text-align: center;
-}
-
-h3 {
-    color: var(--primary-dark);
-    margin-top: 1rem;
-}
-
-/* =========================
-   HERO SECTION
-========================= */
-
-.hero {
-    text-align: center;
-    background: white;
-    padding: 2rem;
-    border-radius: 20px;
-    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
-}
-
-.hero-image {
-    width: 100%;
-    max-width: 950px;
-    border-radius: 20px;
-    margin-bottom: 1.5rem;
-    box-shadow: 0 10px 25px rgba(0, 119, 255, 0.2);
-}
-
-.hero p {
-    max-width: 760px;
-    margin: 0 auto;
-    font-size: 1.1rem;
-}
-
-/* =========================
-   PAGE BANNER
-========================= */
 
 .page-banner {
     text-align: center;
     margin-bottom: 3rem;
 }
 
+.page-banner h1,
+.page-banner h2 {
+    color: var(--primary-dark);
+    font-size: 2.3rem;
+    margin-bottom: 1rem;
+}
+
 .page-banner p {
-    max-width: 700px;
-    margin: 0 auto;
+    color: var(--muted);
     font-size: 1.1rem;
 }
 
-/* =========================
-   ORGANIZATION CARDS
-========================= */
-
 .organizations-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
 }
 
 .organization-card {
     background: var(--card);
-    border-radius: 18px;
     padding: 2rem;
-    text-align: center;
+    border-radius: 18px;
     border: 1px solid var(--border);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .organization-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-5px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
 }
 
-.organization-logo {
-    width: 180px;
-    height: auto;
-    border-radius: 16px;
-    margin-bottom: 1rem;
-    object-fit: cover;
-}
-
-.organization-description {
-    margin-top: 1rem;
-    color: #374151;
-}
-
-.organization-contact {
-    margin-top: 1rem;
+.organization-card h3 {
     color: var(--primary-dark);
+    margin-bottom: 1rem;
+}
+
+.organization-card a {
+    color: var(--primary);
+    text-decoration: none;
     font-weight: bold;
 }
 
-/* =========================
-   LISTS
-========================= */
-
-ul {
-    max-width: 700px;
-    margin: 2rem auto;
-    padding-left: 1.5rem;
+.organization-card a:hover {
+    text-decoration: underline;
 }
 
-li {
-    margin: 0.8rem 0;
-    padding: 0.8rem;
-    background: #eef6ff;
-    border-left: 6px solid var(--primary);
-    border-radius: 8px;
+.organization-card p {
+    margin-bottom: 0.8rem;
 }
 
 /* =========================
-   FOOTER
+   FORM STYLING
 ========================= */
+
+.form-container {
+    max-width: 720px;
+    margin: 0 auto;
+    background: var(--card);
+    padding: 2.5rem;
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h1 {
+    text-align: center;
+    color: var(--primary-dark);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.6rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.6rem;
+    font-weight: bold;
+    color: var(--primary-dark);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    background: white;
+}
+
+.form-group textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 10px rgba(0, 119, 255, 0.2);
+}
+
+.btn-submit {
+    width: 100%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 14px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.btn-submit:hover {
+    transform: translateY(-3px);
+    opacity: 0.95;
+}
+
+/* =========================
+   ADD ORGANIZATION LINK
+========================= */
+
+.add-link {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.add-link a {
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    padding: 1rem 1.5rem;
+    border-radius: 12px;
+    font-weight: bold;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.add-link a:hover {
+    transform: translateY(-3px);
+    opacity: 0.95;
+}
 
 footer {
     background: var(--primary-dark);
     color: white;
     text-align: center;
-    padding: 1.3rem;
-    margin-top: 3rem;
+    padding: 1.5rem;
+    margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+    main {
+        width: 95%;
+    }
+
+    .form-container {
+        padding: 1.5rem;
+    }
+
+    .page-banner h1,
+    .page-banner h2 {
+        font-size: 1.8rem;
+    }
+
+    nav ul {
+        gap: 1rem;
+    }
 }
 
 /* =========================
-   RESPONSIVE DESIGN
+   FLASH MESSAGES
 ========================= */
 
-@media (max-width: 768px) {
+.alert {
 
-    header {
-        padding: 1.2rem;
-    }
+    padding: 15px;
 
-    header h1 {
-        font-size: 1.8rem;
-    }
+    margin: 20px auto;
 
-    nav {
-        flex-direction: column;
-        align-items: center;
-    }
+    border-radius: 10px;
 
-    nav a {
-        width: 90%;
-        text-align: center;
-    }
+    width: 90%;
 
-    main {
-        padding: 1rem;
-    }
+    max-width: 900px;
 
-    .hero {
-        padding: 1.5rem;
-    }
+    font-weight: bold;
 
-    .hero-image {
-        border-radius: 14px;
-    }
+    border: 1px solid transparent;
 
-    h2 {
-        font-size: 1.8rem;
-    }
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.08);
 
-    .organizations-container {
-        grid-template-columns: 1fr;
-    }
+}
 
-    .organization-card {
-        padding: 1.5rem;
-    }
+.alert.success {
 
-    .organization-logo {
-        width: 140px;
-    }
+    color: #155724;
+
+    background-color: #d4edda;
+
+    border-color: #c3e6cb;
+
+}
+
+.alert.error {
+
+    color: #721c24;
+
+    background-color: #f8d7da;
+
+    border-color: #f5c6cb;
+
+}
+
+.alert.warning {
+
+    color: #856404;
+
+    background-color: #fff3cd;
+
+    border-color: #ffeeba;
+
+}
+
+.alert.info {
+
+    color: #0c5460;
+
+    background-color: #d1ecf1;
+
+    border-color: #bee5eb;
+
+}
+
+/* =========================
+   HERO IMAGE
+========================= */
+
+.hero-image {
+    width: 300px;
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto 2rem auto;
 }
