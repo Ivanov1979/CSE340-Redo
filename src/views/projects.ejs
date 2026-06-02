@@ -17,7 +17,7 @@
             <div class="organization-card">
 
                 <h3>
-                    <a href="/project/<%= project.project_id %>">
+                    <a href="/projects/<%= project.project_id || project.id %>">
                         <%= project.title %>
                     </a>
                 </h3>
@@ -28,12 +28,12 @@
 
                 <p>
                     <strong>Date:</strong>
-                    <%= project.date.toDateString() %>
+                    <%= project.date ? new Date(project.date).toDateString() : "No date available" %>
                 </p>
 
                 <p>
                     <strong>Organization:</strong>
-                    <a href="/organization/<%= project.organization_id %>">
+                    <a href="/organizations/<%= project.organization_id %>">
                         <%= project.organization_name %>
                     </a>
                 </p>
