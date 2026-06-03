@@ -59,7 +59,10 @@ const getProjectDetails = async (id) => {
     `;
 
     const result = await db.query(query, [id]);
-    return result.rows.length > 0 ? result.rows[0] : null;
+
+    return result.rows.length > 0
+        ? result.rows[0]
+        : null;
 };
 
 const getProjectsByOrganizationId = async (organizationId) => {
