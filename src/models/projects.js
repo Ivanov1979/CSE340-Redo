@@ -4,7 +4,7 @@ const getAllProjects = async () => {
     const query = `
         SELECT
             p.project_id,
-            p.name AS title,
+            p.title,
             p.description,
             p.date,
             p.location,
@@ -24,7 +24,7 @@ const getUpcomingProjects = async (number_of_projects) => {
     const query = `
         SELECT
             p.project_id,
-            p.name AS title,
+            p.title,
             p.description,
             p.date,
             p.location,
@@ -46,7 +46,7 @@ const getProjectDetails = async (id) => {
     const query = `
         SELECT
             p.project_id,
-            p.name AS title,
+            p.title,
             p.description,
             p.date,
             p.location,
@@ -69,7 +69,7 @@ const getProjectsByOrganizationId = async (organizationId) => {
     const query = `
         SELECT
             project_id,
-            name AS title,
+            title,
             description,
             date,
             location,
@@ -92,7 +92,7 @@ const createProject = async (
 ) => {
     const query = `
         INSERT INTO projects (
-            name,
+            title,
             description,
             location,
             date,
@@ -124,7 +124,7 @@ const updateProject = async (
     const query = `
         UPDATE projects
         SET
-            name = $1,
+            title = $1,
             description = $2,
             location = $3,
             date = $4,
