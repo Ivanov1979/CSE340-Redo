@@ -1,8 +1,8 @@
+```ejs
 <%- include("partials/header", { title }) %>
 
     <section class="page-banner">
 
-        ```
         <h2>
             <%= title %>
         </h2>
@@ -12,26 +12,20 @@
             to our partner organizations.
         </p>
 
-        <% if ( session && session.user && session.user.role_name==="admin" ) { %>
+        <% if (session && session.user && session.user.role_name==="admin" ) { %>
 
             <p>
-
                 <a class="button" href="/new-project">
-
                     Create New Project
-
                 </a>
-
             </p>
 
             <% } %>
-                ```
 
     </section>
 
     <section class="organizations-container">
 
-        ```
         <% if (projects && projects.length> 0) { %>
 
             <% projects.forEach(project=> { %>
@@ -39,13 +33,9 @@
                 <div class="organization-card">
 
                     <h3>
-
                         <a href="/projects/<%= project.project_id %>">
-
                             <%= project.title %>
-
                         </a>
-
                     </h3>
 
                     <p>
@@ -53,53 +43,33 @@
                     </p>
 
                     <p>
-
                         <strong>Date:</strong>
-
                         <%= project.date ? new Date(project.date).toDateString() : "No date available" %>
-
                     </p>
 
                     <p>
-
                         <strong>Location:</strong>
-
                         <%= project.location %>
-
                     </p>
 
                     <p>
-
                         <strong>Organization:</strong>
-
                         <a href="/organizations/<%= project.organization_id %>">
-
                             <%= project.organization_name %>
-
                         </a>
-
                     </p>
 
                     <p>
-
                         <a href="/projects/<%= project.project_id %>">
-
                             View Details
-
                         </a>
 
-                        <% if ( session && session.user && session.user.role_name==="admin" ) { %>
-
+                        <% if (session && session.user && session.user.role_name==="admin" ) { %>
                             |
-
                             <a href="/edit-project/<%= project.project_id %>">
-
                                 Edit Project
-
                             </a>
-
                             <% } %>
-
                     </p>
 
                 </div>
@@ -113,7 +83,6 @@
                         </p>
 
                         <% } %>
-                            ```
 
     </section>
 
