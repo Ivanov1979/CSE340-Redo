@@ -1,14 +1,22 @@
 <%- include('partials/header', { title }) %>
 
     <main>
+
+        ```
         <section class="page-banner">
+
             <h1>
                 <%= organization.name %>
             </h1>
-            <p>Organization details</p>
+
+            <p>
+                Organization details
+            </p>
+
         </section>
 
         <section class="organization-detail">
+
             <h2>
                 <%= organization.name %>
             </h2>
@@ -22,10 +30,33 @@
                 <%= organization.contact_email %>
             </p>
 
-            <p>
-                <a href="/organizations">Back to Organizations</a>
-            </p>
+            <% if ( session && session.user && session.user.role_name==="admin" ) { %>
+
+                <p>
+
+                    <a href="/edit-organization/<%= organization.organization_id %>">
+
+                        Edit Organization
+
+                    </a>
+
+                </p>
+
+                <% } %>
+
+                    <p>
+
+                        <a href="/organizations">
+
+                            Back to Organizations
+
+                        </a>
+
+                    </p>
+
         </section>
+        ```
+
     </main>
 
     <%- include('partials/footer') %>

@@ -42,13 +42,17 @@
 
         </section>
 
-        <p class="add-link">
+        <% if (session && session.user && session.user.role_name==="admin" ) { %>
 
-            <a href="/organizations/new">
-                Add a New Organization
-            </a>
+            <p class="add-link">
 
-        </p>
+                <a href="/organizations/new">
+                    Add a New Organization
+                </a>
+
+            </p>
+
+            <% } %>
 
     </main>
 

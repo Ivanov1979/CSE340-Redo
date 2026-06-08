@@ -1,53 +1,93 @@
 <%- include("partials/header", { title }) %>
 
-<section class="page-banner">
-    <h2>
-        <%= project.title %>
-    </h2>
-</section>
+    <section class="page-banner">
 
-<section class="organization-card">
+        ```
+        <h2>
+            <%= project.title %>
+        </h2>
+        ```
 
-    <p>
-        <strong>Description:</strong>
-        <%= project.description %>
-    </p>
+    </section>
 
-    <p>
-        <strong>Date:</strong>
-        <%= project.date ? new Date(project.date).toDateString() : "No date available" %>
-    </p>
+    <section class="organization-card">
 
-    <p>
-        <strong>Location:</strong>
-        <%= project.location %>
-    </p>
+        ```
+        <p>
 
-    <p>
-        <strong>Organization:</strong>
-        <a href="/organizations/<%= project.organization_id %>">
-            <%= project.organization_name %>
-        </a>
-    </p>
+            <strong>Description:</strong>
 
-</section>
+            <%= project.description %>
 
-<p class="add-link">
-    <a href="/edit-project/<%= project.project_id || project.id %>">
-        Edit Project
-    </a>
-</p>
+        </p>
 
-<p class="add-link">
-    <a href="/new-project">
-        Add a New Service Project
-    </a>
-</p>
+        <p>
 
-<p class="add-link">
-    <a href="/projects">
-        Return to Projects List
-    </a>
-</p>
+            <strong>Date:</strong>
 
-<%- include("partials/footer") %>
+            <%= project.date ? new Date(project.date).toDateString() : "No date available" %>
+
+        </p>
+
+        <p>
+
+            <strong>Location:</strong>
+
+            <%= project.location %>
+
+        </p>
+
+        <p>
+
+            <strong>Organization:</strong>
+
+            <a href="/organizations/<%= project.organization_id %>">
+
+                <%= project.organization_name %>
+
+            </a>
+
+        </p>
+        ```
+
+    </section>
+
+    <% if ( session && session.user && session.user.role_name==="admin" ) { %>
+
+        ```
+        <p class="add-link">
+
+            <a href="/edit-project/<%= project.project_id || project.id %>">
+
+                Edit Project
+
+            </a>
+
+        </p>
+
+        <p class="add-link">
+
+            <a href="/new-project">
+
+                Add a New Service Project
+
+            </a>
+
+        </p>
+        ```
+
+        <% } %>
+
+            <p class="add-link">
+
+                ```
+                <a href="/projects">
+
+                    Return to Projects List
+
+                </a>
+                ```
+
+            </p>
+
+            <%- include("partials/footer") %>

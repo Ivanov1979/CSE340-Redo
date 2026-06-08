@@ -32,15 +32,17 @@
 
         </section>
 
-        <p class="add-link">
+        <% if ( session && session.user && session.user.role_name==="admin" ) { %>
 
-            <a href="/new-category">
+            <p class="add-link">
 
-                Add a New Category
+                <a href="/new-category">
+                    Add a New Category
+                </a>
 
-            </a>
+            </p>
 
-        </p>
+            <% } %>
 
     </main>
 

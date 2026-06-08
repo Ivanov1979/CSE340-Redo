@@ -1,86 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
+<nav>
 
-<head>
+    <ul>
 
-    <meta charset="UTF-8">
+        <li>
+            <a href="/">Home</a>
+        </li>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <li>
+            <a href="/organizations">Organizations</a>
+        </li>
 
-    <title>
-        <%= title %>
-    </title>
+        <li>
+            <a href="/projects">Projects</a>
+        </li>
 
-    <!-- Main CSS -->
-    <link rel="stylesheet" href="/css/styles.css">
+        <li>
+            <a href="/categories">Categories</a>
+        </li>
 
-</head>
+        <% if (session && session.user) { %>
 
-<body>
+            <li>
+                <a href="/dashboard">
+                    Dashboard
+                </a>
+            </li>
 
-    <header>
+            <li>
+                <a href="/logout">
+                    Logout
+                </a>
+            </li>
 
-        <h1>
-            CSE 340 Service Network
-        </h1>
-
-        <nav>
-
-            <ul>
+            <% } else { %>
 
                 <li>
-                    <a href="/">
-                        Home
+                    <a href="/login">
+                        Login
                     </a>
                 </li>
 
-                <li>
-                    <a href="/organizations">
-                        Organizations
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/projects">
-                        Projects
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/categories">
-                        Categories
-                    </a>
-                </li>
                 <li>
                     <a href="/register">
                         Register
                     </a>
                 </li>
 
-            </ul>
+                <% } %>
 
-        </nav>
+    </ul>
 
-    </header>
-
-    <!-- Flash Messages -->
-
-    <% const messages=flash(); %>
-
-        <% Object.keys(messages).forEach(type=> { %>
-
-            <% if (messages[type].length> 0) { %>
-
-                <% messages[type].forEach(msg=> { %>
-
-                    <div class="alert <%= type %>">
-
-                        <%= msg %>
-
-                    </div>
-
-                    <% }); %>
-
-                        <% } %>
-
-                            <% }); %>
+</nav>

@@ -52,27 +52,40 @@ router.get('/', (req, res) => {
 
 router.get('/organizations', getOrganizations);
 
-router.get('/organizations/new', showNewOrganizationForm);
+router.get(
+    '/organizations/new',
+    requireLogin,
+    requireRole('admin'),
+    showNewOrganizationForm
+);
 
 router.post(
     '/organizations/new',
+    requireLogin,
+    requireRole('admin'),
     organizationValidation,
     processNewOrganizationForm
 );
 
 router.get(
     '/edit-organization/:id',
+    requireLogin,
+    requireRole('admin'),
     showEditOrganizationForm
 );
 
 router.post(
     '/edit-organization/:id',
+    requireLogin,
+    requireRole('admin'),
     organizationValidation,
     processEditOrganizationForm
 );
 
 router.get(
     '/organizations/:id/edit',
+    requireLogin,
+    requireRole('admin'),
     showEditOrganizationForm
 );
 
@@ -90,22 +103,30 @@ router.get(
 
 router.get(
     '/new-category',
+    requireLogin,
+    requireRole('admin'),
     showNewCategoryForm
 );
 
 router.post(
     '/new-category',
+    requireLogin,
+    requireRole('admin'),
     categoryValidation,
     processNewCategoryForm
 );
 
 router.get(
     '/edit-category/:id',
+    requireLogin,
+    requireRole('admin'),
     showEditCategoryForm
 );
 
 router.post(
     '/edit-category/:id',
+    requireLogin,
+    requireRole('admin'),
     categoryValidation,
     processEditCategoryForm
 );
@@ -124,22 +145,30 @@ router.get(
 
 router.get(
     '/new-project',
+    requireLogin,
+    requireRole('admin'),
     showNewProjectForm
 );
 
 router.post(
     '/new-project',
+    requireLogin,
+    requireRole('admin'),
     projectValidation,
     processNewProjectForm
 );
 
 router.get(
     '/edit-project/:id',
+    requireLogin,
+    requireRole('admin'),
     showEditProjectForm
 );
 
 router.post(
     '/edit-project/:id',
+    requireLogin,
+    requireRole('admin'),
     projectValidation,
     processEditProjectForm
 );
@@ -194,4 +223,3 @@ router.get(
 );
 
 export default router;
-
