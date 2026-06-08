@@ -1,0 +1,48 @@
+<%- include('partials/header', { title }) %>
+
+    <main>
+
+        <section class="organizations-container">
+
+            <h1>
+                Registered Users
+            </h1>
+
+            <% if (users && users.length> 0) { %>
+
+                <% users.forEach(user=> { %>
+
+                    <div class="organization-card">
+
+                        <p>
+                            <strong>Name:</strong>
+                            <%= user.name %>
+                        </p>
+
+                        <p>
+                            <strong>Email:</strong>
+                            <%= user.email %>
+                        </p>
+
+                        <p>
+                            <strong>Role:</strong>
+                            <%= user.role_name %>
+                        </p>
+
+                    </div>
+
+                    <% }) %>
+
+                        <% } else { %>
+
+                            <p>
+                                No users found.
+                            </p>
+
+                            <% } %>
+
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>

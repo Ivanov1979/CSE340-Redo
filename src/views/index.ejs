@@ -4,7 +4,9 @@
 
         <img src="/images/learning-mathematics-process.png" alt="Learning Mathematics Process" class="hero-image">
 
-        <h2>Welcome to the Learning Mathematics Process</h2>
+        <h2>
+            Welcome to the Learning Mathematics Process
+        </h2>
 
         <p>
             Supporting organizations, projects, and educational service categories
@@ -13,4 +15,18 @@
 
     </section>
 
-    <%- include("partials/footer") %>
+    <% if (session && session.user) { %>
+
+        <section>
+
+            <p>
+                <a href="/dashboard">
+                    My Dashboard
+                </a>
+            </p>
+
+        </section>
+
+        <% } %>
+
+            <%- include("partials/footer") %>

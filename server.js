@@ -1,24 +1,16 @@
 import express from "express";
-
 import path from "path";
-
 import { fileURLToPath } from "url";
-
 import dotenv from "dotenv";
-
 import session from "express-session";
 
 import flash from "./src/middleware/flash.js";
-
 import routes from "./src/routes.js";
-
 
 // Load environment variables
 dotenv.config();
 
-
 const app = express();
-
 
 // Fix __dirname for ES Modules
 const __filename =
@@ -27,7 +19,6 @@ const __filename =
 const __dirname =
     path.dirname(__filename);
 
-
 // Environment Variables
 const PORT =
     process.env.PORT || 3000;
@@ -35,13 +26,11 @@ const PORT =
 const SESSION_SECRET =
     process.env.SESSION_SECRET;
 
-
 /* =========================
    VIEW ENGINE
 ========================= */
 
 app.set("view engine", "ejs");
-
 
 /* =========================
    VIEWS DIRECTORY
@@ -55,28 +44,21 @@ app.set(
     )
 );
 
-
 /* =========================
    SESSION MIDDLEWARE
 ========================= */
 
-app.use(session({
-
-    secret: SESSION_SECRET,
-
-    resave: false,
-
-    saveUninitialized: true,
-
-    cookie: {
-
-        maxAge:
-            60 * 60 * 1000
-
-    }
-
-}));
-
+app.use(
+    session({
+        secret: SESSION_SECRET,
+        resave: false,
+        saveUninitialized: true,
+        cookie: {
+            maxAge:
+                60 * 60 * 1000
+        }
+    })
+);
 
 /* =========================
    FLASH MIDDLEWARE
@@ -84,6 +66,19 @@ app.use(session({
 
 app.use(flash);
 
+/* =========================
+   MAKE SESSION AVAILABLE
+   TO ALL EJS VIEWS
+========================= */
+
+app.use((req, res, next) => {
+
+    res.locals.session =
+        req.session;
+
+    next();
+
+});
 
 /* =========================
    BODY PARSING
@@ -97,7 +92,6 @@ app.use(
 
 app.use(express.json());
 
-
 /* =========================
    STATIC FILES
 ========================= */
@@ -110,7 +104,6 @@ app.use(
         )
     )
 );
-
 
 /* =========================
    TEST SESSION ROUTE
@@ -137,13 +130,11 @@ app.get(
     }
 );
 
-
 /* =========================
    ROUTES
 ========================= */
 
 app.use(routes);
-
 
 /* =========================
    START SERVER

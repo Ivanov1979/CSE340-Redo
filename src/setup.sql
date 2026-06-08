@@ -2,6 +2,8 @@ DROP TABLE IF EXISTS project_categories;
 DROP TABLE IF EXISTS categories;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS organization;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS roles;
 
 CREATE TABLE organization (
     organization_id SERIAL PRIMARY KEY,
@@ -40,6 +42,47 @@ CREATE TABLE project_categories (
     FOREIGN KEY (category_id)
         REFERENCES categories(category_id)
         ON DELETE CASCADE
+);
+
+CREATE TABLE roles (
+    role_id SERIAL PRIMARY KEY,
+    role_name VARCHAR(50) NOT NULL UNIQUE,
+    role_description TEXT
+);
+
+INSERT INTO roles (
+    role_name,
+    role_description
+)
+VALUES
+(
+    'user',
+    'Standard user with basic access'
+),
+(
+    'admin',
+    'Administrator with full system access'
+);
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+
+    name VARCHAR(100) NOT NULL,
+
+    email VARCHAR(100)
+        NOT NULL
+        UNIQUE,
+
+    password_hash VARCHAR(255)
+        NOT NULL,
+
+    role_id INT,
+
+    created_at TIMESTAMP
+        DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (role_id)
+        REFERENCES roles(role_id)
 );
 
 INSERT INTO organization

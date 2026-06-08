@@ -1,0 +1,35 @@
+<%- include('partials/header', { title }) %>
+
+    <main>
+
+        <section class="dashboard-container">
+
+            <h1>
+                Dashboard
+            </h1>
+
+            <p>
+                <strong>Name:</strong>
+                <%= name %>
+            </p>
+
+            <p>
+                <strong>Email:</strong>
+                <%= email %>
+            </p>
+
+            <% if ( session && session.user && session.user.role_name==="admin" ) { %>
+
+                <p>
+                    <a href="/users">
+                        View Registered Users
+                    </a>
+                </p>
+
+                <% } %>
+
+        </section>
+
+    </main>
+
+    <%- include('partials/footer') %>

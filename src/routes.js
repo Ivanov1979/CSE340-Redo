@@ -1,6 +1,18 @@
 import express from 'express';
 
 import {
+    showUserRegistrationForm,
+    processUserRegistrationForm,
+    showLoginForm,
+    processLoginForm,
+    processLogout,
+    requireLogin,
+    requireRole,
+    showDashboard,
+    showUsersPage
+} from "./controllers/users.js";
+
+import {
     getOrganizations,
     getOrganization,
     showNewOrganizationForm,
@@ -137,4 +149,49 @@ router.get(
     getProject
 );
 
+/* USERS */
+
+router.get(
+    '/register',
+    showUserRegistrationForm
+);
+
+router.post(
+    '/register',
+    processUserRegistrationForm
+);
+
+router.get(
+    '/login',
+    showLoginForm
+);
+
+router.post(
+    '/login',
+    processLoginForm
+);
+
+router.get(
+    '/logout',
+    processLogout
+);
+
+/* PROTECTED DASHBOARD */
+
+router.get(
+    '/dashboard',
+    requireLogin,
+    showDashboard
+);
+
+/* ADMIN USERS PAGE */
+
+router.get(
+    '/users',
+    requireLogin,
+    requireRole('admin'),
+    showUsersPage
+);
+
 export default router;
+
