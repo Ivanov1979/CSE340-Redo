@@ -10,6 +10,10 @@ import {
 } from '../models/organizations.js';
 
 import {
+    isVolunteer
+} from '../models/volunteers.js';
+
+import {
     body,
     validationResult
 } from 'express-validator';
@@ -67,15 +71,24 @@ const getProject = async (req, res, next) => {
         const projectId = req.params.id;
         const project = await getProjectDetails(projectId);
 
-
         if (!project) {
             req.flash('error', 'Project not found');
             return res.redirect('/projects');
         }
 
+        let userIsVolunteer = false;
+
+        if (req.session.user) {
+            userIsVolunteer = await isVolunteer(
+                req.session.user.user_id,
+                projectId
+            );
+        }
+
         res.render('project', {
             title: project.title,
-            project
+            project,
+            userIsVolunteer
         });
     } catch (error) {
         next(error);

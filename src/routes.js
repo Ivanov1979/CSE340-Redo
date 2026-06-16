@@ -1,6 +1,11 @@
 import express from 'express';
 
 import {
+    processAddVolunteer,
+    processRemoveVolunteer
+} from './controllers/volunteers.js';
+
+import {
     showUserRegistrationForm,
     processUserRegistrationForm,
     showLoginForm,
@@ -171,6 +176,20 @@ router.post(
     requireRole('admin'),
     projectValidation,
     processEditProjectForm
+);
+
+/* VOLUNTEERS */
+
+router.post(
+    '/projects/:id/volunteer',
+    requireLogin,
+    processAddVolunteer
+);
+
+router.post(
+    '/projects/:id/remove-volunteer',
+    requireLogin,
+    processRemoveVolunteer
 );
 
 router.get(
