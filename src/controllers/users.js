@@ -6,6 +6,10 @@ import {
     getAllUsers
 } from "../models/users.js";
 
+import {
+    getVolunteerProjects
+} from "../models/volunteers.js";
+
 /* =========================
    REGISTRATION
 ========================= */
@@ -198,24 +202,38 @@ const requireRole = (role) => {
    DASHBOARD
 ========================= */
 
-const showDashboard = (
+const showDashboard = async (
     req,
-    res
+    res,
+    next
 ) => {
 
-    const {
-        name,
-        email
-    } = req.session.user;
+    try {
 
-    res.render(
-        "dashboard",
-        {
-            title: "Dashboard",
+        const {
+            user_id,
             name,
             email
-        }
-    );
+        } = req.session.user;
+
+        const volunteerProjects =
+            await getVolunteerProjects(user_id);
+
+        res.render(
+            "dashboard",
+            {
+                title: "Dashboard",
+                name,
+                email,
+                volunteerProjects
+            }
+        );
+
+    } catch (error) {
+
+        next(error);
+
+    }
 
 };
 
